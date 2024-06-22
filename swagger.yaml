@@ -1,0 +1,235 @@
+openapi: 3.0.0
+info:
+    title: Jobs API
+    contact: {}
+    version: "1.0"
+servers:
+    - url: https://jobs-api-5whj.onrender.com/api/v1
+      variables: {}
+paths:
+    /auth/login:
+        post:
+            tags:
+                - Auth
+            summary: Login User
+            operationId: LoginUser
+            parameters: []
+            requestBody:
+                description: ""
+                content:
+                    application/json:
+                        schema:
+                            allOf:
+                                - $ref: "#/components/schemas/LoginUserRequest"
+                                - example:
+                                      email: ankit@gmail.com
+                                      password: ankit1
+                        example:
+                            email: ankit@gmail.com
+                            password: ankit1
+                required: true
+            responses:
+                "200":
+                    description: ""
+                    headers: {}
+            deprecated: false
+            security: []
+    /auth/register:
+        post:
+            tags:
+                - Auth
+            summary: Register User
+            operationId: RegisterUser
+            parameters: []
+            requestBody:
+                description: ""
+                content:
+                    application/json:
+                        schema:
+                            allOf:
+                                - $ref: "#/components/schemas/RegisterUserRequest"
+                                - example:
+                                      name: ankit
+                                      email: ankit@gmail.com
+                                      password: ankit123
+                        example:
+                            name: ankit
+                            email: ankit@gmail.com
+                            password: ankit123
+                required: true
+            responses:
+                "200":
+                    description: ""
+                    headers: {}
+            deprecated: false
+            security: []
+    /jobs:
+        post:
+            tags:
+                - Jobs
+            summary: CreateJobs
+            operationId: CreateJobs
+            parameters: []
+            requestBody:
+                description: ""
+                content:
+                    application/json:
+                        schema:
+                            allOf:
+                                - $ref: "#/components/schemas/CreateJobsRequest"
+                                - example:
+                                      company: ORACLE
+                                      position: DBA
+                        example:
+                            company: ORACLE
+                            position: DBA
+                required: true
+            responses:
+                "200":
+                    description: ""
+                    headers: {}
+            deprecated: false
+            security:
+                - bearer: []
+        get:
+            tags:
+                - Jobs
+            summary: GetAllJobs
+            operationId: GetAllJobs
+            parameters: []
+            responses:
+                "200":
+                    description: ""
+                    headers: {}
+            deprecated: false
+            security:
+                - bearer: []
+    /jobs/6676e7ddfd07acf8ee465e2f:
+        get:
+            tags:
+                - Jobs
+            summary: GetJob
+            operationId: GetJob
+            parameters: []
+            responses:
+                "200":
+                    description: ""
+                    headers: {}
+            deprecated: false
+            security:
+                - bearer: []
+    /jobs/6676770e40a31dd10cc8a3f9:
+        patch:
+            tags:
+                - Jobs
+            summary: UpdateJob
+            operationId: UpdateJob
+            parameters: []
+            requestBody:
+                description: ""
+                content:
+                    application/json:
+                        schema:
+                            allOf:
+                                - $ref: "#/components/schemas/UpdateJobRequest"
+                                - example:
+                                      company: Infosys
+                                      position: full stack developer
+                        example:
+                            company: Infosys
+                            position: full stack developer
+                required: true
+            responses:
+                "200":
+                    description: ""
+                    headers: {}
+            deprecated: false
+            security:
+                - bearer: []
+        delete:
+            tags:
+                - Jobs
+            summary: RemoveJob
+            operationId: RemoveJob
+            parameters: []
+            responses:
+                "200":
+                    description: ""
+                    headers: {}
+            deprecated: false
+            security:
+                - bearer: []
+components:
+    schemas:
+        LoginUserRequest:
+            title: LoginUserRequest
+            required:
+                - email
+                - password
+            type: object
+            properties:
+                email:
+                    type: string
+                password:
+                    type: string
+            example:
+                email: ankit@gmail.com
+                password: ankit1
+        RegisterUserRequest:
+            title: RegisterUserRequest
+            required:
+                - name
+                - email
+                - password
+            type: object
+            properties:
+                name:
+                    type: string
+                email:
+                    type: string
+                password:
+                    type: string
+            example:
+                name: ankit
+                email: ankit@gmail.com
+                password: ankit123
+        CreateJobsRequest:
+            title: CreateJobsRequest
+            required:
+                - company
+                - position
+            type: object
+            properties:
+                company:
+                    type: string
+                position:
+                    type: string
+            example:
+                company: ORACLE
+                position: DBA
+        UpdateJobRequest:
+            title: UpdateJobRequest
+            required:
+                - company
+                - position
+            type: object
+            properties:
+                company:
+                    type: string
+                position:
+                    type: string
+            example:
+                company: Infosys
+                position: full stack developer
+    securitySchemes:
+        bearer:
+            type: http
+            scheme: bearer
+security: []
+tags:
+    - name: Misc
+      description: ""
+    - name: Auth
+      description: ""
+    - name: Jobs
+      description: ""

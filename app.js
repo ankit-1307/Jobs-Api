@@ -36,6 +36,13 @@ app.use("/api/v1/jobs", [userAuthentication, jobsRouter]);
 app.get("/", (req, res) => {
     res.send('<h1>Jobs API</h1><a href="/api-docs">Documentation</a>');
 });
+// Options for swagger-jsdoc
+// Swagger ui
+const swaggerUi = require("swagger-ui-express");
+const YAML = require("yamljs");
+const swaggerDocument = YAML.load("./swagger.yaml");
+
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 //errors
 app.use(notFoundMiddleware);
